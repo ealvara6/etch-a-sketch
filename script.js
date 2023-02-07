@@ -3,21 +3,15 @@ const button = document.querySelector('.resize-button');
 let previousPixelSize;
 let pixelSize = 16;
 let etchCreated = false;
+let opacity = 0;
 
-// for(let i =  0; i < 16; i++) {
-//     let divRow = document.createElement('div');
-//     divRow.setAttribute('class', 'row');
-//     container.appendChild(divRow);
-
-//     for(let z = 0; z < 16; z++) {
-//         let divColumn = document.createElement('div');
-//         divColumn.setAttribute('class', 'column');
-//         divRow.appendChild(divColumn);
-//         divColumn.addEventListener('mouseover', (e) => {
-//             divColumn.style.backgroundColor = 'black';
-//         });
-//     }
-// }
+rgbGenerator = () => {
+    let rgb = [];
+    for(let i = 0; i < 3; i++) {
+        rgb[i] = Math.floor(Math.random() * 255);
+    }
+    return rgb;
+}
 
 
 setResizeBox = (pixelSize) => {
@@ -39,7 +33,11 @@ setResizeBox = (pixelSize) => {
             divColumn.setAttribute('class', 'column');
             divRow.appendChild(divColumn);
             divColumn.addEventListener('mouseover', (e) => {
-                divColumn.style.backgroundColor = 'black';
+                    opacity += 0.1;
+                let rgb = rgbGenerator();
+                // divColumn.style.backgroundColor = 'black';
+                // divColumn.style.backgroundColor = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+                divColumn.style.backgroundColor= `rgb(0,0,0,${opacity})`;
             });
         }
     }
@@ -53,14 +51,6 @@ clearEtch = () => {
 }
 
 setResizeBox(pixelSize);
-// clearEtch = () => {
-//     let divRow = document.getElementsByClassName('.row');
-//     let divColumn = document.getElementsByClassName('.column');
-//     for(let i = 0; i < divRow.length; i++) {
-//         divRow[i].remove();
-//         divColumn[i].remove();
-//     }
-// }
 
 button.addEventListener('click', (e) => {
     isFalse = true;
